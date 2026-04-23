@@ -43,7 +43,7 @@ import tools
 # ---------------------------------------------------------------------------
 # Identity
 # ---------------------------------------------------------------------------
-configure(agent_name="ci-code-review", policy="standard")
+configure(agent_name="ci-code-review", policy="require_approval")
 
 MODEL        = "claude-sonnet-4-6"
 MAX_FIX_TURNS = 6
@@ -104,7 +104,7 @@ def _count_diff_lines(diff: str) -> int:
 # Test output helpers
 # ---------------------------------------------------------------------------
 
-_SAFE_TEST_CMD_RE = re.compile(r'^[\w\s./:@=&|,\-\+\^\(\)\"\']+$')
+_SAFE_TEST_CMD_RE = re.compile(r'^[\w\s./:@=&|,\-\+\^\(\)\<\>\"\']+$')
 
 def _run_tests(cmd: str) -> tuple[str, int]:
     """Run tests and return (output, exit_code)."""
